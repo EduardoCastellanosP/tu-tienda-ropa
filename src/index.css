@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* FUENTES: Archivo Black para títulos, JetBrains para textos técnicos */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@300;500&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  /* El color de fondo base para evitar parpadeos blancos */
+  background-color: #F2F0EB;
+  font-family: 'JetBrains Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Forzamos la fuente de los títulos */
+h1, h2, h3 {
+  font-family: 'Archivo Black', sans-serif;
+}
