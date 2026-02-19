@@ -5,7 +5,7 @@ import DesfileGallery from './components/DesfileGallery'; // Asegúrate de que e
 import logoPrincipal from './assets/images/Logo-blanco.png';
 import logoIntro from './assets/images/Logo-intro.png';
 import UnisexGrid from './components/UnisexGrid'; // Asegúrate de que el nombre coincida
-
+import Footer from './components/Footer'; // Ajusta la ruta
 // Tutor Tip: Esto carga todas tus fotos de la carpeta automáticamente
 const imagesContext = import.meta.glob('./assets/images/imagenesdesfile/*.{png,jpg,jpeg,svg}', { eager: true });
 const fotosDelDesfile = Object.values(imagesContext).map((mod) => mod.default);
@@ -79,6 +79,8 @@ function App() {
 
             {/* ESPACIO PARA PRODUCTOS ABAJO */}
             <UnisexGrid />
+            <Footer />
+            
 
           </motion.main>
         )}
