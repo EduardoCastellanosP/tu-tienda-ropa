@@ -14,7 +14,7 @@ const DesfileGallery = ({ images }) => {
 
   return (
     <section className="relative w-full h-[100vh] bg-black overflow-hidden">
-      <AnimatePresence mode="wait">
+      <AnimatePresence >
   <motion.img
     key={index}
     src={images[index]}
