@@ -63,12 +63,20 @@ const ProductCard = ({ prod }) => {
             </div>
 
             {/* INFO DERECHA: Con scroll independiente si la pantalla es pequeña */}
+            
             <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col overflow-y-auto bg-white">
+             <div className="mt-3  border-t border-gray-100 hidden md:block text-[9px] text-gray-400 uppercase tracking-[0.1em] leading-loose">
+                <p>Material: 100% Algodón Premium</p>
+                <p>Hecho en Bucaramanga, Colombia</p>
+                <p>Colección OFFSIDE STUDIO 2026</p>
+              </div>
+
               <h2 className="font-extrabold text-lg md:text-xl uppercase tracking-tighter mb-2">{prod.nombre}</h2>
               <p className="text-gray-500 font-medium mb-8 text-sm md:text-base">{prod.precio}</p>
               
               <p className="text-[9px] font-extrabold uppercase tracking-widest mb-4">Talla Unisex</p>
-              <div className="flex gap-2 mb-10">
+              
+              <div className="flex gap-2 mb-10 text-black">
                 {['S', 'M', 'L', 'XL'].map(talla => (
                   <button 
                     key={talla}
@@ -84,11 +92,7 @@ const ProductCard = ({ prod }) => {
                 Añadir al Carrito
               </button>
 
-              <div className="mt-8 pt-6 border-t border-gray-100 hidden md:block text-[9px] text-gray-400 uppercase tracking-[0.1em] leading-loose">
-                <p>Material: 100% Algodón Premium</p>
-                <p>Hecho en Bucaramanga, Colombia</p>
-                <p>Colección OFFSIDE STUDIO 2026</p>
-              </div>
+             
             </div>
           </div>
         </div>
