@@ -4,6 +4,7 @@ import IntroPS2 from './components/IntroPS2';
 import DesfileGallery from './components/DesfileGallery'; // Asegúrate de que el nombre coincida
 import logoPrincipal from './assets/images/Logo-blanco.png';
 import logoIntro from './assets/images/Logo-intro.png';
+import UnisexGrid from './components/UnisexGrid'; // Asegúrate de que el nombre coincida
 
 // Tutor Tip: Esto carga todas tus fotos de la carpeta automáticamente
 const imagesContext = import.meta.glob('./assets/images/imagenesdesfile/*.{png,jpg,jpeg,svg}', { eager: true });
@@ -77,13 +78,12 @@ function App() {
             
 
             {/* ESPACIO PARA PRODUCTOS ABAJO */}
-            <div className="p-20 text-center">
-              <p className="text-gray-400 italic tracking-widest">URBAN ARCHIVE EDITION</p>
-            </div>
+            <UnisexGrid />
 
           </motion.main>
         )}
       </AnimatePresence>
+     
     </div>
   );
 }
