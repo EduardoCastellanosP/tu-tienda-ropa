@@ -197,8 +197,8 @@ const UnisexGrid = () => {
   ];
 
   return (
-    <section className="py-10 md:py-1 px-0 md:px-1 bg-white">
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-x-2 md:gap-x-1 gap-y-10 md:gap-y-6">
+    <section className="py-10 md:py-0 px-1 md:px-2 bg-white">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-x-2 md:gap-x-1 gap-y-10 md:gap-y-16">
         {productos.map(p => <ProductCard key={p.id} prod={p} />)}
       </div>
     </section>
