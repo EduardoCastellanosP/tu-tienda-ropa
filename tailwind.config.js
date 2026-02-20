@@ -4,10 +4,18 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // Montserrat Extra Bold para títulos
         heading: ['Montserrat', 'sans-serif'],
-        // Montserrat Medium para cuerpo de texto
         body: ['Montserrat', 'sans-serif'],
+      },
+      // Asegúrate de que estas llaves estén bien cerradas
+      animation: {
+        'marquee': 'marquee 25s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
     },
   },
