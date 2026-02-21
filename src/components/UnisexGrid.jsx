@@ -74,8 +74,8 @@ const ProductCard = ({ prod }) => {
             )}
           </div>
         </div>
-        <h3 className="font-bold text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-[#2b2a2d]">{prod.nombre}</h3>
-        <p className="text-[10px] text-gray-500 mt-1 uppercase tracking-widest">{prod.precio}</p>
+        <h3 className="font-bold pl-4  text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-[#2b2a2d]">{prod.nombre}</h3>
+        <p className="text-[10px] pl-4 text-gray-500 mt-1 uppercase tracking-widest">{prod.precio}</p>
       </div>
 
       {isOpen && (
