@@ -32,7 +32,6 @@ const CartPage = () => {
     }
   }, [items]);
 
-  // NUEVA FUNCIÓN: Actualizar Talla desde el Carrito
   const updateSize = (id, newSize) => {
     setItems(prevItems =>
       prevItems.map(item =>
@@ -64,25 +63,21 @@ const CartPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
- const handleFinalCheckout = (e) => {
+  const handleFinalCheckout = (e) => {
     e.preventDefault();
 
-    // 1. Validación de campos locales
     if (!formData.nombre || !formData.telefono || !formData.direccion) {
       alert("Error: Todos los campos marcados con * son obligatorios.");
       return;
     }
 
-    // 2. Limpieza del monto (Convertir a número entero sin decimales)
     const amountValidado = Math.round(Number(subtotal));
 
-    // 3. Configuración del Handler
     const handler = window.ePayco.checkout.configure({
-      key: "49515a84b91212fd167104277d598382", // Llave de pruebas estándar
+      key: "49515a84b91212fd167104277d598382", 
       test: true 
     });
 
-    // 4. Objeto de datos con parámetros de seguridad
     const data = {
       invoice: `OFFSIDE-${Date.now()}`, 
       currency: 'cop',
@@ -93,16 +88,12 @@ const CartPage = () => {
       tax: '0',
       country: 'co',
       lang: 'es',
-      external: 'false', // Abre el modal sobre la misma página (evita bloqueos de popups)
-
-      // Datos del cliente (Aseguramos que no viajen como undefined)
+      external: 'false',
       name_billing: formData.nombre || "",
       address_billing: formData.direccion || "",
       mobile_billing: formData.telefono || "",
       email_billing: formData.email || "",
       city_billing: formData.ciudad || "Bucaramanga",
-
-      // URLs de redirección - Verifica que estas rutas existan en tu App.jsx
       url_confirmation: 'https://tiendaderopa12.netlify.app/response',
       url_response: 'https://tiendaderopa12.netlify.app/response',
       method: 'GET'
@@ -115,7 +106,7 @@ const CartPage = () => {
     <div className="bg-[#e8e3da] min-h-screen pt-5 pb-20 px-4 md:px-12 lg:px-24 text-[#2b2a2d]">
       <div className="max-w-7xl mx-auto">
         <div className="border-b border-[#2b2a2d]/20 pb-1 mb-6 flex justify-between items-end">
-            <img src={logocarro} alt="Cart Icon" className="inline-block w-12 md:w-34 mr-4 " />
+          <img src={logocarro} alt="Cart Icon" className="inline-block w-12 md:w-34 mr-4 " />
           <span className="text-[10px] font-bold uppercase tracking-[0.6em] mb-15">({items.length}) Items</span>
         </div>
 
@@ -131,30 +122,26 @@ const CartPage = () => {
                     <div className="flex justify-between items-start">
                       <div className="space-y-4">
                         <h2 className="font-['Aku_&_Kamu',_sans-serif] text-2xl uppercase tracking-tight leading-none">{item.nombre}</h2>
-                        
-                        {/* SELECTOR DE TALLA RESTAURADO */}
-                        {/* SELECTOR DE TALLA REDUCIDO */}
-                    <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Size
-                      </span>
-                      <select 
-                        value={item.talla}
-                        onChange={(e) => updateSize(item.id, e.target.value)}
-                        className="bg-transparent text-[12px] font-bold uppercase tracking-widest border-none p-0 w-10 focus:ring-0 cursor-pointer outline-none "
-                      >
-                        {['S', 'M', 'L', 'XL'].map(t => (
-                          <option key={t} value={t} className="bg-[#e8e3da] text-black">{t}</option>
-                        ))}
-                      </select>
-                    </div>
+                        <div className="flex flex-col gap-1">
+                          <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Size</span>
+                          <select 
+                            value={item.talla}
+                            onChange={(e) => updateSize(item.id, e.target.value)}
+                            className="bg-transparent text-[12px] font-bold uppercase tracking-widest border-none p-0 w-10 focus:ring-0 cursor-pointer outline-none "
+                          >
+                            {['S', 'M', 'L', 'XL'].map(t => (
+                              <option key={t} value={t} className="bg-[#e8e3da] text-black">{t}</option>
+                            ))}
+                          </select>
+                        </div>
                       </div>
                       <p className="font-bold text-lg">${(item.precio * item.cantidad).toLocaleString('es-CO')}</p>
                     </div>
                     <div className="flex justify-between items-end mt-8">
                       <div className="flex border border-[#2b2a2d]/20">
-                         <button onClick={() => updateQuantity(item.id, -1)} className="px-4 py-2 hover:bg-[#2b2a2d] hover:text-white transition-colors">-</button>
-                         <span className="px-4 py-2 font-bold w-10 text-center text-xs">{item.cantidad}</span>
-                         <button onClick={() => updateQuantity(item.id, 1)} className="px-4 py-2 hover:bg-[#2b2a2d] hover:text-white transition-colors">+</button>
+                        <button onClick={() => updateQuantity(item.id, -1)} className="px-4 py-2 hover:bg-[#2b2a2d] hover:text-white transition-colors">-</button>
+                        <span className="px-4 py-2 font-bold w-10 text-center text-xs">{item.cantidad}</span>
+                        <button onClick={() => updateQuantity(item.id, 1)} className="px-4 py-2 hover:bg-[#2b2a2d] hover:text-white transition-colors">+</button>
                       </div>
                       <button onClick={() => removeItem(item.id)} className="text-[10px] font-bold uppercase border-b border-[#2b2a2d] pb-1 hover:text-red-500 hover:border-red-500 transition-all">Remove</button>
                     </div>
@@ -182,49 +169,48 @@ const CartPage = () => {
               >
                 Proceed to Checkout
               </button>
-
-              <Link 
-        to="/" 
-        className="block text-center text-[9px] uppercase tracking-[0.4em] text-gray-400 hover:text-black font-bold transition-colors pt-1"
-      >
-        ← Seguir Comprando
-      </Link>
+              <Link to="/" className="block text-center text-[9px] uppercase tracking-[0.4em] text-gray-400 hover:text-black font-bold transition-colors pt-1">
+                ← Seguir Comprando
+              </Link>
             </div>
           </div>
         </div>
       </div>
 
-     
+      {/* MODAL DE SHIPPING CORREGIDO */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="bg-[#F2F0EB] w-full max-w-lg p-8 md:p-12 relative shadow-2xl">
-            <button onClick={() => setIsModalOpen(false)} className="absolute top-5 right-5 text-[10px] font-black uppercase tracking-widest border-b border-black">Cerrar [X]</button>
-            <h2 className="font-['Aku_&_Kamu',_sans-serif] text-4xl uppercase tracking-tighter mb-8 text-[#2b2a2d]">Shipping</h2>
-            <form onSubmit={handleFinalCheckout} className="space-y-6">
-              <div>
-                <label className="block text-[9px] font-black uppercase tracking-widest text-gray-500 mb-2">Nombre Completo *</label>
-                <input required type="text" name="nombre" onChange={handleInputChange} className="w-full bg-transparent border-b border-[#2b2a2d]/20 py-2 outline-none focus:border-[#2b2a2d] text-sm uppercase text-[#2b2a2d]" />
-              </div>
-              <div className="grid grid-cols-2 gap-6">
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/80 backdrop-blur-sm p-2 md:p-4">
+          <div className="absolute inset-0" onClick={() => setIsModalOpen(false)}></div>
+          <div className="bg-[#F2F0EB] w-full max-w-lg relative shadow-2xl flex flex-col max-h-[90vh] z-[1001] overflow-hidden">
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-5 text-[10px] font-black uppercase tracking-widest border-b border-black z-10 bg-[#F2F0EB]">Cerrar [X]</button>
+            <div className="overflow-y-auto p-6 md:p-12">
+              <h2 className="font-['Aku_&_Kamu',_sans-serif] text-3xl md:text-4xl uppercase tracking-tighter mb-8 text-[#2b2a2d]">Shipping</h2>
+              <form onSubmit={handleFinalCheckout} className="space-y-6">
                 <div>
-                  <label className="block text-[9px] font-black uppercase tracking-widest text-gray-500 mb-2">Email *</label>
-                  <input required type="email" name="email" onChange={handleInputChange} className="w-full bg-transparent border-b border-[#2b2a2d]/20 py-2 outline-none focus:border-[#2b2a2d] text-sm text-[#2b2a2d]" />
+                  <label className="block text-[9px] font-black uppercase tracking-widest text-gray-500 mb-2">Nombre Completo *</label>
+                  <input required type="text" name="nombre" onChange={handleInputChange} className="w-full bg-transparent border-b border-[#2b2a2d]/20 py-2 outline-none focus:border-[#2b2a2d] text-sm uppercase text-[#2b2a2d]" />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-[9px] font-black uppercase tracking-widest text-gray-500 mb-2">Email *</label>
+                    <input required type="email" name="email" onChange={handleInputChange} className="w-full bg-transparent border-b border-[#2b2a2d]/20 py-2 outline-none focus:border-[#2b2a2d] text-sm text-[#2b2a2d]" />
+                  </div>
+                  <div>
+                    <label className="block text-[9px] font-black uppercase tracking-widest text-gray-500 mb-2">Teléfono *</label>
+                    <input required type="tel" name="telefono" onChange={handleInputChange} className="w-full bg-transparent border-b border-[#2b2a2d]/20 py-2 outline-none focus:border-[#2b2a2d] text-sm text-[#2b2a2d]" />
+                  </div>
                 </div>
                 <div>
-                  <label className="block text-[9px] font-black uppercase tracking-widest text-gray-500 mb-2">Teléfono *</label>
-                  <input required type="tel" name="telefono" onChange={handleInputChange} className="w-full bg-transparent border-b border-[#2b2a2d]/20 py-2 outline-none focus:border-[#2b2a2d] text-sm text-[#2b2a2d]" />
+                  <label className="block text-[9px] font-black uppercase tracking-widest text-gray-500 mb-2">Ciudad *</label>
+                  <input required type="text" name="ciudad" onChange={handleInputChange} className="w-full bg-transparent border-b border-[#2b2a2d]/20 py-2 outline-none focus:border-[#2b2a2d] text-sm uppercase text-[#2b2a2d]" />
                 </div>
-              </div>
-              <div>
-                <label className="block text-[9px] font-black uppercase tracking-widest text-gray-500 mb-2">Ciudad *</label>
-                <input required type="text" name="ciudad" onChange={handleInputChange} className="w-full bg-transparent border-b border-[#2b2a2d]/20 py-2 outline-none focus:border-[#2b2a2d] text-sm uppercase text-[#2b2a2d]" />
-              </div>
-              <div>
-                <label className="block text-[9px] font-black uppercase tracking-widest text-gray-500 mb-2">Dirección Exacta *</label>
-                <input required type="text" name="direccion" onChange={handleInputChange} className="w-full bg-transparent border-b border-[#2b2a2d]/20 py-2 outline-none focus:border-[#2b2a2d] text-sm uppercase text-[#2b2a2d]" />
-              </div>
-              <button type="submit" className="w-full bg-[#2b2a2d] text-white py-5 text-[11px] font-black uppercase tracking-[0.3em] hover:invert transition-all mt-4">Pagar con PSE / ePayco</button>
-            </form>
+                <div>
+                  <label className="block text-[9px] font-black uppercase tracking-widest text-gray-500 mb-2">Dirección Exacta *</label>
+                  <input required type="text" name="direccion" onChange={handleInputChange} className="w-full bg-transparent border-b border-[#2b2a2d]/20 py-2 outline-none focus:border-[#2b2a2d] text-sm uppercase text-[#2b2a2d]" />
+                </div>
+                <button type="submit" className="w-full bg-[#2b2a2d] text-white py-5 text-[11px] font-black uppercase tracking-[0.3em] hover:invert transition-all mt-4">Pagar con PSE / ePayco</button>
+              </form>
+            </div>
           </div>
         </div>
       )}
