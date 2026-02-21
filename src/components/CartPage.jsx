@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logocarro from '../assets/images/loguito2.png';
+import logocarro from '../assets/images/Loguito2.png';
 
 const CartPage = () => {
   const [items, setItems] = useState([]);
