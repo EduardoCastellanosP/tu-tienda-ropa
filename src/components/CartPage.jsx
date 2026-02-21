@@ -87,7 +87,7 @@ const CartPage = () => {
       invoice: `OFFSIDE-${Date.now()}`, 
       currency: 'cop',
       name: 'Compra en OFFSIDE STUDIO',
-      description: items.map(i => `${i.nombre} (${i.talla})`).join(', '),
+      description: "Compra Offside Studio",
       amount: amountValidado,
       tax_base: '0',
       tax: '0',
