@@ -9,7 +9,7 @@ import MovingText from './components/MovingText';
 import UnisexGrid from './components/UnisexGrid'; 
 import CartPage from './components/CartPage'; 
 import Footer from './components/Footer'; 
-
+import { Link } from 'react-router-dom';
 const imagesContext = import.meta.glob('./assets/images/imagenesdesfile/*.{png,jpg,jpeg,svg}', { eager: true });
 const fotosDelDesfile = Object.values(imagesContext).map((mod) => mod.default);
 
@@ -63,11 +63,25 @@ function AppContent() {
                 </a>
               </div>
                 <div className="flex-1 flex justify-end items-center">
-                  <a href="/cart" className="text-white">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
-                      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
-                    </svg>
-                  </a>
+                  
+                  <Link 
+                  to="/cart" 
+                  className="text-white flex items-center group transition-all duration-300"
+                  >
+                <svg 
+                  width="22" 
+                  height="22" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="1.3" 
+                  className="group-hover:scale-110 transition-transform"
+                >
+                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                  <path d="M3 6h18" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+              </Link>
                 </div>
               </nav>
             )}
