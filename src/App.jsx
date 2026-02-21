@@ -10,6 +10,7 @@ import UnisexGrid from './components/UnisexGrid';
 import CartPage from './components/CartPage'; 
 import Footer from './components/Footer'; 
 import { Link } from 'react-router-dom';
+import ResponsePage from './components/ResponsePage';
 const imagesContext = import.meta.glob('./assets/images/imagenesdesfile/*.{png,jpg,jpeg,svg}', { eager: true });
 const fotosDelDesfile = Object.values(imagesContext).map((mod) => mod.default);
 
@@ -94,9 +95,11 @@ function AppContent() {
                   </div>
                   <MovingText/>
                   <UnisexGrid />
+                  {/* <Route path="/response" element={<ResponsePage />} /> */}
                 </>
               } />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/response" element={<ResponsePage />} />
             </Routes>
 
             <Footer />

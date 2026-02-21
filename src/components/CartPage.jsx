@@ -64,13 +64,51 @@ const CartPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFinalCheckout = (e) => {
+ const handleFinalCheckout = (e) => {
     e.preventDefault();
+
+    // 1. Validación de campos locales
     if (!formData.nombre || !formData.telefono || !formData.direccion) {
-      alert("Error: Nombre, teléfono y dirección son obligatorios para el despacho.");
+      alert("Error: Todos los campos marcados con * son obligatorios.");
       return;
     }
-    alert("Redirigiendo a ePayco para pago seguro por PSE...");
+
+    // 2. Limpieza del monto (Convertir a número entero sin decimales)
+    const amountValidado = Math.round(Number(subtotal));
+
+    // 3. Configuración del Handler
+    const handler = window.ePayco.checkout.configure({
+      key: "49515a84b91212fd167104277d598382", // Llave de pruebas estándar
+      test: true 
+    });
+
+    // 4. Objeto de datos con parámetros de seguridad
+    const data = {
+      invoice: `OFFSIDE-${Date.now()}`, 
+      currency: 'cop',
+      name: 'Compra en OFFSIDE STUDIO',
+      description: items.map(i => `${i.nombre} (${i.talla})`).join(', '),
+      amount: amountValidado,
+      tax_base: '0',
+      tax: '0',
+      country: 'co',
+      lang: 'es',
+      external: 'false', // Abre el modal sobre la misma página (evita bloqueos de popups)
+
+      // Datos del cliente (Aseguramos que no viajen como undefined)
+      name_billing: formData.nombre || "",
+      address_billing: formData.direccion || "",
+      mobile_billing: formData.telefono || "",
+      email_billing: formData.email || "",
+      city_billing: formData.ciudad || "Bucaramanga",
+
+      // URLs de redirección - Verifica que estas rutas existan en tu App.jsx
+      url_confirmation: 'https://tiendaderopa12.netlify.app/response',
+      url_response: 'https://tiendaderopa12.netlify.app/response',
+      method: 'GET'
+    };
+
+    handler.open(data);
   };
 
   return (
