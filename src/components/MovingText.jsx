@@ -3,7 +3,7 @@ import React from 'react';
 const MovingText = () => {
   return (
     /* Reducimos el padding de py-8/12 a py-3/4 para un contenedor más delgado */
-    <section className="overflow-hidden bg-[#000000] py-1 md:py-2 flex items-center border-y border-[#2b2a2d]/5">
+    <section className="overflow-hidden bg-[#000000] py-1  md:py-2 flex items-center border-y border-[#2b2a2d]/5">
       <div className="animate-marquee-force flex whitespace-nowrap items-center">
         
         {/* Frase 1 - Tamaño reducido de text-2xl a text-xs/sm */}

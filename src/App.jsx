@@ -48,7 +48,20 @@ function AppContent() {
                   <a href="/">
                     <img src={logoPrincipal} alt="Logo" className="h-14 md:h-20 object-contain" />
                   </a>
+                  
                 </div>
+               
+                <div className="hidden lg:flex space-x-10 items-center">
+                <a href="#tops" className="font-['Aku_&_Kamu',_sans-serif] text-[12px] uppercase tracking-[0.2em] text-white hover:opacity-50 transition-all">
+                  Tops
+                </a>
+                <a href="#bottoms" className="font-['Aku_&_Kamu',_sans-serif] text-[12px] uppercase tracking-[0.2em] text-white hover:opacity-50 transition-all">
+                  Bottoms
+                </a>
+                <a href="#hoodies" className="font-['Aku_&_Kamu',_sans-serif] text-[12px] uppercase tracking-[0.2em] text-white hover:opacity-50 transition-all">
+                  Hoodies
+                </a>
+              </div>
                 <div className="flex-1 flex justify-end items-center">
                   <a href="/cart" className="text-white">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
